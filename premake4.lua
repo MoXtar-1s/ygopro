@@ -1,7 +1,8 @@
 solution "ygo"
     location "build"
     language "C++"
-    objdir "obj"
+    objdir "build/obj"
+    USE_IRRKLANG = true
 
     configurations { "Debug", "Release" }
 
@@ -20,6 +21,8 @@ solution "ygo"
 
     configuration "linux"
         defines { "LUA_USE_LINUX" }
+        libdirs { "build/lib" }
+        includedirs { "build/include" }
 
     configuration "vs*"
         flags "EnableSSE2"
@@ -34,7 +37,7 @@ solution "ygo"
     configuration "Debug"
         flags "Symbols"
         defines "_DEBUG"
-        targetdir "bin/debug"
+        targetdir "build/bin/debug"
 
     configuration { "Release", "not vs*" }
         flags "Symbols"
@@ -43,7 +46,7 @@ solution "ygo"
 
     configuration "Release"
         flags { "OptimizeSpeed" }
-        targetdir "bin/release"
+        targetdir "build/bin/release"
 
     include "ocgcore"
     include "gframe"
